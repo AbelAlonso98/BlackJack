@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         rv = findViewById(R.id.rvPlayer);
-
-        new GameThread(this).start();
+        Thread t = new Thread(new GameThread());
+        t.start();
 
 
 
@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         String crupier = s.split("\n")[0];
         String jugador = s.toString().split("\n")[1].split(":")[1].split(" ")[1];
         ArrayList<Card> cartas = new ArrayList<Card>();
-        for(int i = 0; i < jugador.length(); i+=2) {
-            cartas.add(new Card(jugador.substring(i, i+2), this));
+        for (int i = 0; i < jugador.length(); i += 2) {
+            cartas.add(new Card(jugador.substring(i, i + 2), this));
         }
         rv.setAdapter(new CardAdapter(cartas));
 
