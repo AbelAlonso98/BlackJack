@@ -1,0 +1,51 @@
+package com.example.blackjack;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
+
+    final ArrayList<Card> carts;
+
+    public CardAdapter(ArrayList<Card> carts) {
+        this.carts = carts;
+    }
+
+    @NonNull
+    @Override
+    public CardAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card, parent, false);
+        return new ViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull CardAdapter.ViewHolder holder, int position) {
+        holder.bind(carts.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return carts.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder{
+        ImageView iv;
+
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            iv = itemView.findViewById(R.id.imgCard);
+        }
+
+        public void bind (@NonNull Card card){
+            iv.setImageResource(card.getId());
+        }
+    }
+}
